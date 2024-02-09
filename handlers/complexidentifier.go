@@ -8,6 +8,6 @@ type ComplexIdentifier struct {
 
 func NewComplexIdentifier() *ComplexIdentifier {
 	return &ComplexIdentifier{
-		Handler: *NewHandler(`^"(?:(?:(\\")|[^"])|"(?:("{2})|[^"])*")*"`, tokens.IDENTIFIER),
+		Handler: *NewHandler(`^"(?:(?:(\\")|[^"])|"(?:("{2})|[^"])*")*"`, tokens.COMPLEXIDENTIFIER),
 	}
 }

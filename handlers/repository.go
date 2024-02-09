@@ -14,6 +14,8 @@ type Repository struct {
 func Create() *Repository {
 	return &Repository{
 		handlers: []IHandler{
+			NewComplexIdentifier(),
+			NewString(),
 			NewNumber(),
 			NewIdentifiers(),
 			NewWhitespace(),

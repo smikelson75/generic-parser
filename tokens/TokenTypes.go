@@ -4,6 +4,7 @@ type TokenType int
 
 const (
 	IDENTIFIER TokenType = iota
+	COMPLEXIDENTIFIER
 	KEYWORD
 	OPERATOR
 	SYMBOL
@@ -18,6 +19,8 @@ func (t TokenType) String() string {
 	switch t {
 	case IDENTIFIER:
 		return "IDENTIFIER"
+	case COMPLEXIDENTIFIER:
+		return "COMPLEXIDENTIFIER"
 	case KEYWORD:
 		return "KEYWORD"
 	case OPERATOR:

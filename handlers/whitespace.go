@@ -8,6 +8,6 @@ type Whitespace struct {
 
 func NewWhitespace() *Whitespace {
 	return &Whitespace{
-		Handler: *NewHandler(`^[^\S\r\n]*`, tokens.WHITESPACE),
+		Handler: *NewHandler(`^[^\S\r\n]+`, tokens.WHITESPACE),
 	}
 }
