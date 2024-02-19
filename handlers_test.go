@@ -223,6 +223,9 @@ func LoadIdentifierScenerios(t *testing.T) []Scenerio {
 				value:     `'Some ''String'''''`,
 			},
 		},
+		{
+
+		},
 	}
 }
 

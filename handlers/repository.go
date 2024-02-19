@@ -14,6 +14,8 @@ type Repository struct {
 func Create() *Repository {
 	return &Repository{
 		handlers: []IHandler{
+			NewMultiLineComment(),
+			NewSingleLineComment(),
 			NewComplexIdentifier(),
 			NewString(),
 			NewNumber(),
@@ -24,7 +26,7 @@ func Create() *Repository {
 	}
 }
 
-func (r *Repository) Get(reader IBuffer) (*tokens.Token, error) {
+func (r *Repository) Get(reader IReader) (*tokens.Token, error) {
 	for _, source := range r.handlers {
 		token, err := source.Get(reader)
 		if err != nil && err != io.EOF {

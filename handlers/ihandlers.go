@@ -3,6 +3,6 @@ package handlers
 import "github.com/smikelson75/parser/tokens"
 
 type IHandler interface {
-	Get(buffer IBuffer) (*tokens.Token, error)
+	Get(buffer IReader) (*tokens.Token, error)
 	Pattern() string
 }

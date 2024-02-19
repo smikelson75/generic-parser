@@ -18,7 +18,7 @@ func NewHandler(pattern string, kind tokens.TokenType) *Handler {
 	}
 }
 
-func (h Handler) Get(buffer IBuffer) (*tokens.Token, error) {
+func (h Handler) Get(buffer IReader) (*tokens.Token, error) {
 	value, err := buffer.Get(h)
 	if err != nil && err != io.EOF {
 		return nil, err

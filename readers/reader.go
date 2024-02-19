@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"regexp"
 	"strings"
+
+	"github.com/smikelson75/parser/handlers/patterns"
 )
 
 type Reader struct {
@@ -27,6 +29,7 @@ func (r *Reader) Read() error {
 		}
 		r.tokens = append(r.tokens, character)
 	}
+
 	return nil
 }
 
@@ -52,6 +55,10 @@ func (r *Reader) Move(amount int) error {
 		return nil
 	}
 
+	return r.readToEof()
+}
+
+func (r *Reader) readToEof() error {
 	return r.ReadTo('\n')
 }
 
@@ -61,6 +68,28 @@ func (r *Reader) Get(pattern TokenPattern) (*string, error) {
 
 	if matches := tester.FindStringSubmatch(line); matches != nil {
 		return &matches[0], r.Move(len(matches[0]))
+	}
+
+	return nil, nil
+}
+
+func (r *Reader) GetTo(start, end patterns.IPattern) (*string, error) {
+	line := string(r.tokens)
+	begin := regexp.MustCompile(start.Pattern())
+
+	if matches := begin.FindStringSubmatch(line); matches != nil {
+		for {
+			line = string(r.tokens)
+			ending := regexp.MustCompile(end.Pattern())
+
+			if matches := ending.FindStringSubmatch(line); matches != nil {
+				return &matches[0], r.Move(len(matches[0]))
+			}
+
+			if err := r.readToEof(); err != nil {
+				return nil, err
+			}
+		}
 	}
 
 	return nil, nil
