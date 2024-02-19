@@ -3,6 +3,7 @@ package handlers
 import (
 	"io"
 
+	"github.com/smikelson75/parser/handlers/interfaces"
 	"github.com/smikelson75/parser/tokens"
 )
 
@@ -18,7 +19,7 @@ func NewHandler(pattern string, kind tokens.TokenType) *Handler {
 	}
 }
 
-func (h Handler) Get(buffer IReader) (*tokens.Token, error) {
+func (h Handler) Get(buffer interfaces.IReader) (*tokens.Token, error) {
 	value, err := buffer.Get(h)
 	if err != nil && err != io.EOF {
 		return nil, err

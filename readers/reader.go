@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/smikelson75/parser/handlers/patterns"
+	"github.com/smikelson75/parser/handlers/interfaces"
 )
 
 type Reader struct {
@@ -62,7 +62,7 @@ func (r *Reader) readToEof() error {
 	return r.ReadTo('\n')
 }
 
-func (r *Reader) Get(pattern TokenPattern) (*string, error) {
+func (r *Reader) Get(pattern interfaces.IPattern) (*string, error) {
 	line := string(r.tokens)
 	tester := regexp.MustCompile(pattern.Pattern())
 
@@ -73,7 +73,7 @@ func (r *Reader) Get(pattern TokenPattern) (*string, error) {
 	return nil, nil
 }
 
-func (r *Reader) GetTo(start, end patterns.IPattern) (*string, error) {
+func (r *Reader) GetTo(start, end interfaces.IPattern) (*string, error) {
 	line := string(r.tokens)
 	begin := regexp.MustCompile(start.Pattern())
 

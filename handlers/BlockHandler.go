@@ -3,11 +3,12 @@ package handlers
 import (
 	"github.com/smikelson75/parser/tokens"
 	"github.com/smikelson75/parser/handlers/patterns"
+	"github.com/smikelson75/parser/handlers/interfaces"
 )
 
 type BlockHandler struct {
-	startPattern patterns.IPattern
-	endPattern   patterns.IPattern
+	startPattern interfaces.IPattern
+	endPattern   interfaces.IPattern
 	kind         tokens.TokenType
 }
 
@@ -19,7 +20,7 @@ func NewBlockHandler(startPattern, endPattern string, kind tokens.TokenType) *Bl
 	}
 }
 
-func (b BlockHandler) Get(buffer IPatternsBuffer) (*tokens.Token, error) {
+func (b BlockHandler) Get(buffer interfaces.IPatternsBuffer) (*tokens.Token, error) {
 	value, err := buffer.GetTo(b.startPattern, b.endPattern)
 	if err != nil {
 		return nil, err
