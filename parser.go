@@ -1,15 +1,15 @@
 package parser
 
 import (
-	"github.com/smikelson75/parser/handlers"
+	"github.com/smikelson75/parser/handlers/interfaces"
 	"github.com/smikelson75/parser/tokens"
 )
 
 type Parser struct {
-	reader  handlers.IReader
+	reader interfaces.IReader
 }
 
-func NewParser(reader handlers.IReader) *Parser {
+func NewParser(reader interfaces.IReader) *Parser {
 	return &Parser{
 		reader: reader,
 	}
@@ -18,11 +18,5 @@ func NewParser(reader handlers.IReader) *Parser {
 func (s *Parser) Parse() ([]tokens.Token, error) {
 	//repository := handlers.Create()
 
-
-
-
-
 	return nil, nil
 }
-
-

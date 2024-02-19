@@ -4,16 +4,17 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/smikelson75/parser/handlers/interfaces"
 	"github.com/smikelson75/parser/tokens"
 )
 
 type Repository struct {
-	handlers []IHandler
+	handlers []interfaces.IHandler
 }
 
 func Create() *Repository {
 	return &Repository{
-		handlers: []IHandler{
+		handlers: []interfaces.IHandler{
 			NewMultiLineComment(),
 			NewSingleLineComment(),
 			NewComplexIdentifier(),
@@ -26,7 +27,7 @@ func Create() *Repository {
 	}
 }
 
-func (r *Repository) Get(reader IReader) (*tokens.Token, error) {
+func (r *Repository) Get(reader interfaces.IReader) (*tokens.Token, error) {
 	for _, source := range r.handlers {
 		token, err := source.Get(reader)
 		if err != nil && err != io.EOF {
